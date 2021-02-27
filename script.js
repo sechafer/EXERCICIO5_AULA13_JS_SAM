@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var api_key = "563492ad6f91700001000001aeb9ca07ce134faea3cde2d2cb300f77"
+    var api_key = "563492ad6f91700001000001966bf3f6c7a147e0aded31703f161d99"
     var image = '' 
 
     $("#form").submit(function(event){
@@ -10,17 +10,16 @@ $(document).ready(function() {
     })
     function imagesearch(){
         $.ajax({
-            method: 'GET',
-            beforSend: function(xhr){
-                xhr.setRequestHeader ( "Authorization", api_key);
+            beforeSend: function(xhr){
+                xhr.setRequestHeader ("Authorization", api_key);
             },
-            url:"https://api.pexels.com/v1/search?query="+search+"&per_page=3&page=1",
+            url:"https://api.pexels.com/v1/search?query="+search+"&per_page=15&page=1",
             success: function (data) {
                 console.log(data)
-                data.photo.forEach (photo => {
+                data.photos.forEach (photos => {
                   image=`
                   
-                  <img src="${photo.src.original}"width="400" height="300"/>
+                  <img src="${photos.src.tiny}"/>
 
                   `
                   $("#images").append(image)
